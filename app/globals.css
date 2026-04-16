@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+/* ── Terminal Palette ─────────────────────────────────────── */
+:root {
+  --bg:        #0c0e0f;
+  --bg-card:   #111416;
+  --bg-card-h: #161a1c;
+  --border:    #252b2e;
+  --border-h:  #2e3538;
+
+  --c-green:   #39d353;
+  --c-yellow:  #f0c040;
+  --c-orange:  #f07830;
+  --c-red:     #e84040;
+  --c-dim:     #4a5560;
+  --c-muted:   #6b7c88;
+  --c-base:    #a8b8c4;
+  --c-bright:  #d4e4ef;
+
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--c-base);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Page ─────────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  max-width: 960px;
+  margin: 0 auto;
+  gap: 28px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--c-dim);
+  letter-spacing: 0.08em;
+}
+
+.header-tag {
+  color: var(--c-muted);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+}
+
+.header-date {
+  font-size: 10px;
+  color: var(--c-dim);
+}
+
+.header-sub {
+  font-size: 10px;
+  color: var(--c-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ── Overall Banner ───────────────────────────────────────── */
+.overall-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid;
+  background: var(--bg-card);
+  margin: 4px 0;
+}
+
+.overall-banner[data-indicator="operational"]    { border-left-color: var(--c-green); }
+.overall-banner[data-indicator="degraded"]       { border-left-color: var(--c-yellow); }
+.overall-banner[data-indicator="partial_outage"] { border-left-color: var(--c-orange); }
+.overall-banner[data-indicator="major_outage"]   { border-left-color: var(--c-red); }
+.overall-banner[data-indicator="unknown"]        { border-left-color: var(--c-dim); }
+.overall-banner[data-indicator="loading"]        { border-left-color: var(--c-dim); }
+
+.overall-symbol {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.overall-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* ── Cards Grid ───────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+/* ── Status Card ──────────────────────────────────────────── */
+.status-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+
+.status-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.status-card[data-indicator="operational"]::before    { background: var(--c-green); }
+.status-card[data-indicator="degraded"]::before       { background: var(--c-yellow); }
+.status-card[data-indicator="partial_outage"]::before { background: var(--c-orange); }
+.status-card[data-indicator="major_outage"]::before   { background: var(--c-red); }
+.status-card[data-indicator="unknown"]::before        { background: var(--c-dim); }
+.status-card[data-indicator="loading"]::before        { background: var(--c-dim); opacity: 0.4; }
+
+.status-card:hover {
+  border-color: var(--border-h);
+  background: var(--bg-card-h);
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.provider-name-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.provider-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.provider-icon-fallback {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--c-dim);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.provider-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--c-bright);
+}
+
+.provider-sublabel {
+  font-size: 10px;
+  color: var(--c-dim);
+  letter-spacing: 0.06em;
+}
+
+/* Indicator row */
+.indicator-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.indicator-symbol {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.indicator-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* Loading pulse */
+@keyframes pulse-dim {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.status-card[data-indicator="loading"] .indicator-symbol,
+.status-card[data-indicator="loading"] .indicator-label {
+  animation: pulse-dim 1.4s ease-in-out infinite;
+}
+
+/* Description */
+.description-row {
+  font-size: 11px;
+  color: var(--c-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Incidents */
+.incidents-section {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.incident-row {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--c-yellow);
+  line-height: 1.4;
+}
+
+.incident-bullet {
+  flex-shrink: 0;
+  color: var(--c-orange);
+}
+
+.incident-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Card footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  font-size: 10px;
+}
+
+.fetched-at {
+  color: var(--c-dim);
+  letter-spacing: 0.04em;
+}
+
+.status-link {
+  color: var(--c-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.1s;
+}
+
+.status-link:hover { color: var(--c-bright); }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.page-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 10px;
+  color: var(--c-dim);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.footer-rule {
+  letter-spacing: 0;
+  color: var(--border-h);
+}
+
+.footer-note {
+  color: var(--c-dim);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-h); border-radius: 3px; }
