@@ -81,6 +81,24 @@ const PROVIDERS = [
     type: 'atlassian',
     icon: '/icons/cohere.svg',
   },
+  {
+    id: 'xai',
+    name: 'XAI',
+    label: 'xAI',
+    url: 'https://status.x.ai/',
+    endpoint: 'https://status.x.ai/api/v2/summary.json',
+    type: 'atlassian',
+    icon: '/icons/xai.svg',
+  },
+  {
+    id: 'deepseek',
+    name: 'DEEPSEEK',
+    label: 'DeepSeek',
+    url: 'https://status.deepseek.com/',
+    endpoint: 'https://status.deepseek.com/api/v2/summary.json',
+    type: 'atlassian',
+    icon: '/icons/deepseek.svg',
+  },
 ] as const;
 
 // ─── Fetch helpers ────────────────────────────────────────────────────────────
