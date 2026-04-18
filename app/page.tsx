@@ -82,22 +82,22 @@ const PROVIDERS = [
     icon: '/icons/cohere.svg',
   },
   {
-    id: 'xai',
-    name: 'XAI',
-    label: 'xAI',
-    url: 'https://status.x.ai/',
-    endpoint: 'https://status.x.ai/api/v2/summary.json',
-    type: 'atlassian',
-    icon: '/icons/xai.svg',
-  },
-  {
-    id: 'deepseek',
+  id: 'deepseek',
     name: 'DEEPSEEK',
     label: 'DeepSeek',
     url: 'https://status.deepseek.com/',
     endpoint: 'https://status.deepseek.com/api/v2/summary.json',
     type: 'atlassian',
     icon: '/icons/deepseek.svg',
+  },
+  {
+    id: 'perplexity',
+    name: 'PERPLEXITY',
+    label: 'Perplexity AI',
+    url: 'https://status.perplexity.com/',
+    endpoint: '/api/status/perplexity',
+    type: 'gemini',
+    icon: '/icons/perplexity.svg',
   },
 ] as const;
 
