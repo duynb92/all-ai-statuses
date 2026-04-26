@@ -272,6 +272,7 @@ function useNow() {
 
 export default function Page() {
   const now = useNow();
+  const telegramLink = process.env.NEXT_PUBLIC_TELEGRAM_GROUP_LINK;
 
   const [statuses, setStatuses] = useState<ProviderStatus[]>(
     PROVIDERS.map((p) => ({
@@ -350,6 +351,19 @@ export default function Page() {
         <span className="footer-rule">
           {'─'.repeat(46)}
         </span>
+        {telegramLink && (
+          <span className="footer-note">
+            get notified on status changes ·{' '}
+            <a
+              href={telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="status-link"
+            >
+              join telegram group ↗
+            </a>
+          </span>
+        )}
         <span className="footer-note">
           data sourced from official provider status APIs
         </span>
