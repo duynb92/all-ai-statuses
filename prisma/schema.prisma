@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ProviderState {
+  id        String   @id
+  indicator String
+  updatedAt DateTime @updatedAt
+}
+
+model ProviderStateHistory {
+  id         String   @id @default(cuid())
+  providerId String
+  fromState  String
+  toState    String
+  createdAt  DateTime @default(now())
+
+  @@index([providerId])
+  @@index([createdAt])
+}
