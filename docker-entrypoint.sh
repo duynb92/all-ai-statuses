@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-npx prisma db push
+node node_modules/prisma/build/index.js db push
 
 exec node server.js
