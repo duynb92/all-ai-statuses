@@ -14,6 +14,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ARG NEXT_PUBLIC_TELEGRAM_GROUP_LINK
+ENV NEXT_PUBLIC_TELEGRAM_GROUP_LINK=$NEXT_PUBLIC_TELEGRAM_GROUP_LINK
+
 RUN npx prisma generate
 RUN npm run build
 
